@@ -45,7 +45,7 @@ function App() {
 
   const [selectedCharacterId, setSelectedCharacterId] = useState(null);
   const [selectedAbilityId, setSelectedAbilityId] = useState(null);
-  const [theme, setTheme] = useState('neon');
+  const [theme, setTheme] = useState('fantasy');
   const [scale, setScale] = useState(1);
 
   const engineRef = useRef(null);
@@ -258,17 +258,17 @@ function App() {
   return (
     <div className="game-viewport-wrapper">
       <div className="game-viewport" data-theme={theme} style={{ transform: `scale(${scale})` }}>
-        
+
         {/* TOP BAR BAR */}
         <div className="top-hud-bar">
-          <button 
-            className={`last-turn-btn-neon ${isShowingLastTurn ? 'active' : ''}`} 
-            onClick={toggleLastTurn} 
+          <button
+            className={`last-turn-btn-neon ${isShowingLastTurn ? 'active' : ''}`}
+            onClick={toggleLastTurn}
             disabled={isAnimating}
           >
             <span>↺</span> LAST TURN EFFECTS
           </button>
-          
+
           <div className="turn-indicator">
             <div className="phase-text">{engineState.phase.replace('_', ' ')}</div>
             <div className="turn-count">TURN {engineState.turn}</div>
@@ -294,7 +294,7 @@ function App() {
             const coords = CHARACTER_COORDINATES.P2[c.charClass];
             return (
               <CharacterUI
-                key={c.id} 
+                key={c.id}
                 char={c}
                 coords={coords}
                 floats={floatingTexts[c.id]}
@@ -311,7 +311,7 @@ function App() {
             const coords = CHARACTER_COORDINATES.P1[c.charClass];
             return (
               <CharacterUI
-                key={c.id} 
+                key={c.id}
                 char={c}
                 coords={coords}
                 floats={floatingTexts[c.id]}
@@ -426,17 +426,17 @@ function CharacterUI({ char, coords, floats, isActive, isTargetable, hasActed, s
   const isP2 = char.teamId === 'P2';
 
   return (
-    <div 
-      className={`character-card-absolute ${char.hp <= 0 ? 'dead' : ''} ${isActive ? 'selected-unit' : ''} ${isTargetable ? 'targetable-unit' : ''} ${shakeState || ''}`} 
+    <div
+      className={`character-card-absolute ${char.hp <= 0 ? 'dead' : ''} ${isActive ? 'selected-unit' : ''} ${isTargetable ? 'targetable-unit' : ''} ${shakeState || ''}`}
       style={{ left: `${coords.left}px`, top: `${coords.top}px` }}
       onClick={onClick}
     >
       {/* Floating Indicators Container */}
       <div className={`floating-text-viewport ${isP2 ? 'bottom-float' : ''}`}>
         {floats && floats.map(f => (
-          <div 
-            key={f.id} 
-            className={f.isStatic ? 'floating-text-static-hud' : 'floating-text-dynamic-hud'} 
+          <div
+            key={f.id}
+            className={f.isStatic ? 'floating-text-static-hud' : 'floating-text-dynamic-hud'}
             style={{ color: f.color }}
           >
             {f.text}
@@ -453,10 +453,10 @@ function CharacterUI({ char, coords, floats, isActive, isTargetable, hasActed, s
       {/* Visual Avatar Portrait */}
       <div className="unit-avatar-frame">
         {char.hp > 0 ? (
-          <img 
-            className="unit-avatar-image" 
-            src={`/${char.charClass}.png`} 
-            alt={char.charClass} 
+          <img
+            className="unit-avatar-image"
+            src={`/${char.charClass}.png`}
+            alt={char.charClass}
           />
         ) : (
           <div className="unit-dead-overlay">💀 DEFEATED</div>
