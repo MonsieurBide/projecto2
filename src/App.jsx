@@ -182,7 +182,7 @@ function App() {
   };
 
   return (
-    <div className={`app-container ${isShowingLastTurn ? 'grayscale-mode' : ''}`}>
+    <div className="app-container">
       {banner && <div className="banner-overlay">{banner}</div>}
 
       <div className="top-bar glass">
@@ -194,7 +194,7 @@ function App() {
 
       <div className="battle-field">
         {/* P2 Row */}
-        <div className="team-row">
+        <div className="team-row p2-row">
           {p2Chars.map(c => (
             <CharacterUI
               key={c.id} char={c}
@@ -206,12 +206,14 @@ function App() {
         </div>
 
         {/* Selector Row */}
-        <div className="selector-row">
-          {activeChar ? `👆 Selecting for ${activeChar.id}` : (selectedAbilityId ? '🎯 Select Target!' : '⬇️ Select Character ⬇️')}
-        </div>
+        {!banner && (
+          <div className="selector-row">
+            {activeChar ? `👆 Selecting for ${activeChar.id}` : (selectedAbilityId ? '🎯 Select Target!' : '⬇️ Select Character ⬇️')}
+          </div>
+        )}
 
         {/* P1 Row */}
-        <div className="team-row">
+        <div className="team-row p1-row">
           {p1Chars.map(c => (
             <CharacterUI
               key={c.id} char={c}
